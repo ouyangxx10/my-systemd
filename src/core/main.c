@@ -2308,6 +2308,12 @@ int main(int argc, char *argv[]) {
         Manager *m = NULL;
         FDSet *fds = NULL;
 
+        int hpi=0; /*wanghp add for debug -- print para*/
+        if(argc > 0){
+            for(hpi=0;hpi<argc;hpi++){
+               log_error_errno(errno,"-----wanghp-debug:argv[%d]=%s",hpi,argv[hpi]);
+            }
+        }
         /* SysV compatibility: redirect init → telinit */
         redirect_telinit(argc, argv);
 
