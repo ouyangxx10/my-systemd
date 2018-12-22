@@ -2311,7 +2311,7 @@ int main(int argc, char *argv[]) {
         int hpi=0; /*wanghp add for debug -- print para*/
         if(argc > 0){
             for(hpi=0;hpi<argc;hpi++){
-               log_error_errno(errno,"-----wanghp-debug:argv[%d]=%s",%m,hpi,argv[hpi]);
+               log_error_errno(errno,"-----wanghp-debug:argv[%d]=%s,%m",hpi,argv[hpi]);
                log_error("-----wanghp-debug:argv[%d]=%s",hpi,argv[hpi]);
                printf("-----wanghp-debug:argv[%d]=%s",hpi,argv[hpi]);
             }
