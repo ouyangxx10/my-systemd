@@ -2514,7 +2514,7 @@ int main(int argc, char *argv[]) {
                                &error_message);
         if (r < 0)
                 goto finish;
-
+        log_info("-----wanghp:before manager_new print arg_system=%d,arg_action=%d", arg_system,arg_action);
         r = manager_new(arg_system ? UNIT_FILE_SYSTEM : UNIT_FILE_USER,
                         arg_action == ACTION_TEST ? MANAGER_TEST_FULL : 0,
                         &m);
@@ -2538,24 +2538,25 @@ int main(int argc, char *argv[]) {
         queue_default_job = !arg_serialization || arg_switched_root;
 
         before_startup = now(CLOCK_MONOTONIC);
-
+        log_info("--------wanghp:before manager_startup--------------line=%d",__LINE__);
         r = manager_startup(m, arg_serialization, fds);
         if (r < 0) {
                 log_error_errno(r, "Failed to fully start up daemon: %m");
                 error_message = "Failed to start up manager";
                 goto finish;
         }
-
+        log_info("--------wanghp:after manager_startup--------------line=%d",__LINE__);
         /* This will close all file descriptors that were opened, but not claimed by any unit. */
         fds = fdset_free(fds);
         arg_serialization = safe_fclose(arg_serialization);
 
         if (queue_default_job) {
+                log_info("--------wanghp:before do_queue_default--------------line=%d",__LINE__);
                 r = do_queue_default_job(m, &error_message);
                 if (r < 0)
                         goto finish;
         }
-
+        log_info("--------wanghp:after do_queue_default--------------line=%d",__LINE__);
         after_startup = now(CLOCK_MONOTONIC);
 
         log_full(arg_action == ACTION_TEST ? LOG_INFO : LOG_DEBUG,
@@ -2567,7 +2568,7 @@ int main(int argc, char *argv[]) {
                 retval = EXIT_SUCCESS;
                 goto finish;
         }
-
+        log_info("--------wanghp:will enter into main loop--------------line=%d",__LINE__);
         (void) invoke_main_loop(m,
                                 &reexecute,
                                 &retval,
