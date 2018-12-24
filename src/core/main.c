@@ -1780,7 +1780,7 @@ static int invoke_main_loop(
                         *ret_error_message = "Failed to run main loop";
                         return log_emergency_errno(r, "Failed to run main loop: %m");
                 }
-
+                log_info("--------wnaghp:%s,%d,m->exit_code=%d",__FILE__,__LINE__,m->exit_code);
                 switch (m->exit_code) {
 
                 case MANAGER_RELOAD:
