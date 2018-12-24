@@ -1857,7 +1857,7 @@ int unit_start(Unit *u) {
          * before it will start again. */
 
         unit_add_to_dbus_queue(u);
-
+    log_info("-------wanghp:%s,%d,check its the start of unit ------",__FILE__,__LINE__);
         return UNIT_VTABLE(u)->start(u);
 }
 
